@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    tools {
+        maven 'MAVEN-HOME'   // Maven tool name configured earlier
+    }
+    stages {
+        stage('Git Repo & Clean') {
+            steps {
+                echo "📥 Cloning the repository and cleaning..."
+                // Delete old folder if exists
+                bat 'rmdir /s /q mavenjava || exit 0'
+                // Clone your GitHub repository (replace the link below)
+                bat 'git clone https://github.com/vpremkumar14/MavenJava.git'
+                // Clean project
+                bat 'mvn clean -f mavenjava/pom.xml'
+            }
+        }
+        stage('Install') {
+            steps {
+                echo "⚙️ Installing dependencies..."
+                bat 'mvn install -f mavenjava/pom.xml'
+            }
+        }
+        stage('Test') {
+            steps {
+                echo "🧪 Running tests..."
+                bat 'mvn test -f mavenjava/pom.xml'
+            }
+        }
+        stage('Package') {
+            steps {
+                echo "📦 Packaging the project..."
+                bat 'mvn package -f mavenjava/pom.xml'
+            }
+        }
+    }
+}
