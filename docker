@@ -1,0 +1,36 @@
+week 5 docker
+docker pull redis
+docker run --name my-redis -d redis
+docker ps
+docker exec -it my-redis redis-cli
+docker stop my-redis
+docker start my-redis
+docker rm my-redis
+docker rmi redis
+cd /c/DockerProjects/Redis
+mkdir ~/DockerProjects/Redis
+cd ~/DockerProjects/Redis
+docker build -t redisnew .
+docker run --name myredisnew -d redisnew
+docker ps
+docker stop myredisnew
+docker login
+docker ps -a
+docker commit 0e993d2009a1 budarajumadhurika/redis1
+docker images
+docker push budarajumadhurika/redis1
+docker rm 0e993d2009a1
+docker rmi budarajumadhurika/redis1
+docker ps -a
+docker logout
+docker pull budarajumadhurika/redis1
+docker run --name myredis -d budarajumadhurika/redis1
+docker exec -it myredis redis-cli
+SET name "Abcdef"
+GET name
+exit
+docker ps -a
+docker stop myredis
+docker rm 50a6e4a9c326
+docker images
+docker rmi budarajumadhurika/redis1
